@@ -8,7 +8,9 @@ const email = document.getElementById("email");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (password.value === confirmPassword.value) {
-    const data = JSON.parse(localStorage.getItem("users"));
+    const newData = JSON.parse(localStorage.getItem("users"));
+    const data = newData || [];
+
     if (
       data &&
       data.find((item) => {
@@ -25,17 +27,15 @@ form.addEventListener("submit", (e) => {
         obj[keyValues[0]] = keyValues[1];
       }
       obj.id = Math.random();
-      console.log(formData.entries());
 
-      let initialArr = [];
+      data.push(obj);
 
-      if (data) data.push(obj);
-      else initialArr.push(obj);
-
-      localStorage.setItem("users", JSON.stringify(data ? data : initialArr));
+      localStorage.setItem("users", JSON.stringify(data));
     }
   } else alert("Please re-check your password");
 
-  const inputs = [...document.getElementsByTagName("input")];
-  inputs.map((input) => (input.value = ""));
+  window.location.href = "../signIn/index.html";
+
+  // const inputs = [...document.getElementsByTagName("input")];
+  // inputs.map((input) => (input.value = ""));
 });

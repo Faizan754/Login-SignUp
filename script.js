@@ -31,9 +31,9 @@ function getLayout(label, isSignUp) {
           <div id="span"><span></span></div>
           <p>
             ${isSignUp ? `Already` : `Don't`} have an account?
-            <a href="../${
-              isSignUp ? `LoginDashboard` : "SignupDashboard"
-            }/index.html">${isSignUp ? `SignIn` : `SignUp`} here</a>
+            <a href="../${isSignUp ? `signIn` : "signUp"}/index.html">${
+      isSignUp ? `SignIn` : `SignUp`
+    } here</a>
           </p>
         </div>
       </section>
