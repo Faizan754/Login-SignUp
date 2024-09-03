@@ -101,6 +101,39 @@ body > img {
   padding: 4px 0;
 }
 
+.user-profile {
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  cursor: default;
+  z-index: 2;
+  padding: 10px;
+  display: none;
+  overflow: scroll;
+}
+
+.user-profile-row {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.user-profile-row h2 {
+  margin-right: 10px;
+}
+
+.fa-xmark {
+  position: inherit;
+  right: 0;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
 .w-auto table tr td {
   border-bottom: 2px solid black;
 }
@@ -110,8 +143,8 @@ body > img {
 }
 
 .w-auto table td div img {
-  width: 200px;
-  height: 200px;
+  width: 50px;
+  height: 50px;
   margin: 10px 20px;
   border-radius: 15px;
 }
@@ -119,6 +152,11 @@ body > img {
 .w-auto table th div div {
   width: 80%;
   text-align: left;
+}
+
+.products .user-profile img {
+  width: 100px;
+  height: 100px;
 }
 
 .products .w-auto table tbody:first-child :last-child {

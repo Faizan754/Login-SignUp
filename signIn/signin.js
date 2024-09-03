@@ -12,6 +12,6 @@ form.addEventListener("submit", (e) => {
 
   if (userData) {
     localStorage.setItem("currentUser", userData.id);
-    window.location.href = "../dashboard/index.html";
+    window.location.replace("../dashboard");
   } else alert("Please check your E-mail and Password again.");
 });

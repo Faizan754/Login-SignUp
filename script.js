@@ -1,10 +1,15 @@
 const body = document.getElementsByTagName("body")[0];
 
-getLayout(body.dataset.layout, body.dataset.layout === "Sign Up");
+const CURRENT_USER = parseFloat(localStorage.getItem("currentUser"));
 
-function getLayout(label, isSignUp) {
-  body.innerHTML =
-    `<main>
+if (CURRENT_USER) {
+  window.location.replace(`../dashboard`);
+} else {
+  getLayout(body.dataset.layout, body.dataset.layout === "Sign Up");
+
+  function getLayout(label, isSignUp) {
+    body.innerHTML =
+      `<main>
       <section id="login-background">
       </section>
       <section id="signin-page">
@@ -31,12 +36,13 @@ function getLayout(label, isSignUp) {
           <div id="span"><span></span></div>
           <p>
             ${isSignUp ? `Already` : `Don't`} have an account?
-            <a href="../${isSignUp ? `signIn` : "signUp"}/index.html">${
-      isSignUp ? `SignIn` : `SignUp`
-    } here</a>
+            <a href="../${isSignUp ? `signIn` : "signUp"}">${
+        isSignUp ? `SignIn` : `SignUp`
+      } here</a>
           </p>
         </div>
       </section>
     </main>
 ` + body.innerHTML;
+  }
 }

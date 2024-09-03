@@ -10,7 +10,7 @@ const layoutData = !dataValue
   : [dataValue];
 
 if (!currentUser) {
-  window.location.replace(`${dataValue ? "../" : ""}../signIn/index.html`);
+  window.location.replace(`${dataValue ? "../" : ""}../signin`);
 } else {
   dashboardLayout();
 
@@ -61,12 +61,7 @@ if (!currentUser) {
       dashboardCards.innerHTML +
       `<div class="dashboard">
     <h1>${i}</h1>
-    <h4>Lorem</h4>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae explicabo
-      doloremque neque porro nihil officiis minima, fugiat debitis commodi
-      delectus!
-    </p>
+    <h4>Total: </h4>
   </div>`;
   }
 
@@ -90,23 +85,23 @@ if (!currentUser) {
   <ul>
   <li><a class="link ${!dataValue && "active"}" href="${
         dataValue ? "../" : ""
-      }index.html">Dashboard</a></li>
-  <li><a class="link ${dataValue === "Users" && "active"}" href="${
-        dataValue ? (dataValue === "Users" ? "" : "../Users/") : "Users/"
-      }index.html">Users</a></li>
+      }">Dashboard</a></li>
+  <li><a class="link ${dataValue === "users" && "active"}" href="${
+        dataValue ? (dataValue === "users" ? "" : "../users/") : "users"
+      }">Users</a></li>
   <li><a class="link ${dataValue === "Products" && "active"}" href="${
         dataValue
           ? dataValue === "Products"
             ? ""
-            : "../Products/"
-          : "Products/"
-      }index.html">Products</a></li>
+            : "../products/"
+          : "products/"
+      }">Products</a></li>
   <li><a class="link ${dataValue === "Categories" && "active"}" href="${
         dataValue
           ? dataValue === "Categories"
             ? ""
-            : "../Categories/"
-          : "Categories/"
+            : "../categories/"
+          : "categories/"
       }">Categories</a></li>
           </ul>
         </section>
