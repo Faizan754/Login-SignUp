@@ -15,8 +15,8 @@ export default function fetchApi(dataValue) {
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
-      const TOTAL = document.querySelector(".dashboard h4");
 
+      const TOTAL = document.querySelector(".dashboard h4");
       TOTAL.innerHTML = TOTAL.innerHTML + json.length;
 
       const wAuto = document.getElementsByClassName("w-auto")[0];
@@ -24,14 +24,14 @@ export default function fetchApi(dataValue) {
       const tBody = document.createElement("tbody");
       wAuto.innerHTML = "";
       tBody.innerHTML = getHeading(
-        dataValue === "users"
+        dataValue === "Users"
           ? { a: "Name", b: "UserName", c: "E-Mail" }
           : dataValue === "Products"
           ? { a: "Title", b: "Price", c: "Image" }
           : { a: "Categories" }
       );
       json.map((element) => {
-        if (dataValue === "users") {
+        if (dataValue === "Users") {
           const { firstname, lastname } = element.name;
           element.fullName = `${firstname} ${lastname}`;
           const { city, street, number } = element.address;
@@ -50,7 +50,7 @@ export default function fetchApi(dataValue) {
       });
       wAuto.appendChild(table);
       table.appendChild(tBody);
-      if (dataValue === "users" || dataValue === "Products") {
+      if (dataValue === "Users" || dataValue === "Products") {
         const COMPLETE_DETAILS = [
           ...document.getElementsByClassName("complete-details"),
         ];
@@ -76,35 +76,35 @@ export default function fetchApi(dataValue) {
               allRating,
               image,
             } = json[index];
-            const NAME = dataValue === "users" ? fullName : title;
-            const DESC = dataValue === "users" ? username : description;
-            const PRICE = dataValue === "users" ? email : price;
-            const CATEGORY = dataValue === "users" ? password : category;
-            const RATING = dataValue === "users" ? phone : allRating;
-            const IMAGE = dataValue === "users" ? userAddress : image;
+            const NAME = dataValue === "Users" ? fullName : title;
+            const DESC = dataValue === "Users" ? username : description;
+            const PRICE = dataValue === "Users" ? email : price;
+            const CATEGORY = dataValue === "Users" ? password : category;
+            const RATING = dataValue === "Users" ? phone : allRating;
+            const IMAGE = dataValue === "Users" ? userAddress : image;
 
             userProfile.innerHTML = `
             <i class="fa-solid fa-xmark"></i>
             <div class="user-profile-row"><h2>ID:</h2><p>${id}</p></div>
             <div class="user-profile-row"><h2>${
-              dataValue === "users" ? "Name" : `Title`
+              dataValue === "Users" ? "Name" : `Title`
             }:</h2><p>${NAME}</p></div>
             <div class="user-profile-row"><h2>${
-              dataValue === "users" ? "UserName" : `Description`
+              dataValue === "Users" ? "UserName" : `Description`
             }:</h2><p>${DESC}</p></div>
             <div class="user-profile-row"><h2>${
-              dataValue === "users" ? "E-Mail" : `Price`
+              dataValue === "Users" ? "E-Mail" : `Price`
             }:</h2><p>${PRICE}</p></div>
             <div class="user-profile-row"><h2>${
-              dataValue === "users" ? "Password" : `Category`
+              dataValue === "Users" ? "Password" : `Category`
             }:</h2><p>${CATEGORY}</p></div>
             <div class="user-profile-row"><h2>${
-              dataValue === "users" ? "Phone no" : `Title`
+              dataValue === "Users" ? "Phone no" : `Title`
             }:</h2><p>${RATING}</p></div>
             <div class="user-profile-row"><h2>${
-              dataValue === "users" ? "Address" : `Image`
+              dataValue === "Users" ? "Address" : `Image`
             }:</h2>${
-              dataValue === "users" ? `<p>${IMAGE}</p>` : `<img src="${IMAGE}">`
+              dataValue === "Users" ? `<p>${IMAGE}</p>` : `<img src="${IMAGE}">`
             }</div>
             `;
             const CLOSE_USER_PROFILE =
@@ -134,7 +134,7 @@ export default function fetchApi(dataValue) {
 
   function getRow({ a, b, c }) {
     return `<tr><td><div><div ${
-      dataValue === "users" || dataValue === "Products"
+      dataValue === "Users" || dataValue === "Products"
         ? "class='complete-details'"
         : ""
     }>${a}</div></div></td>${

@@ -6,8 +6,13 @@ const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 const body = document.querySelector("body");
 const dataValue = body.dataset.value;
 const layoutData = !dataValue
-  ? ["Dashboard", "Users", "Products", "Categories"]
-  : [dataValue];
+  ? [
+      { i: "Dashboard", total: "dashboard" },
+      { i: "Users", total: "users" },
+      { i: "Products", total: "products" },
+      { i: "Categories", total: "categories" },
+    ]
+  : [{ i: dataValue }];
 
 if (!currentUser) {
   window.location.replace(`${dataValue ? "../" : ""}../signin`);
@@ -51,18 +56,57 @@ if (!currentUser) {
   });
 
   for (let element of layoutData) {
-    layoutCards(element);
+    layoutCards({ i: element.i, total: element.total });
   }
 
   dataValue && fetchApi(dataValue);
 
-  function layoutCards(i) {
-    dashboardCards.innerHTML =
-      dashboardCards.innerHTML +
-      `<div class="dashboard">
-    <h1>${i}</h1>
-    <h4>Total: </h4>
-  </div>`;
+  function layoutCards({ i, total }) {
+    dashboardCards.insertAdjacentHTML(
+      `beforeend`,
+      `<div class="dashboard" data-name="${total}">
+      <h1>${i}</h1>
+      <h4 id="total-${total}">Total: </h4>
+      </div>`,
+    );
+
+    // dashboardCards.innerHTML += cardHTML;
+    getTotalLength(total);
+  }
+
+  function getTotalLength(totalType) {
+    const DASHBOARD_CARDS = document.getElementById(`total-${totalType}`);
+
+    if (totalType === "dashboard") {
+      Promise.all([
+        fetch("https://fakestoreapi.com/users").then((res) => res.json()),
+        fetch("https://fakestoreapi.com/products").then((res) => res.json()),
+        fetch("https://fakestoreapi.com/products/categories").then((res) =>
+          res.json(),
+        ),
+      ])
+        .then(([users, products, categories]) => {
+          const total = users.length + products.length + categories.length;
+          DASHBOARD_CARDS.innerHTML = `Total: ${total}`;
+        })
+        .catch(() => {
+          DASHBOARD_CARDS.innerHTML = `Total: N/A`;
+        });
+    } else {
+      fetch(
+        `https://fakestoreapi.com/${
+          totalType === "categories" ? "products/categories" : totalType
+        }`,
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          DASHBOARD_CARDS.innerHTML = `Total: ${json.length}`;
+          console.log(DASHBOARD_CARDS.innerHTML);
+        })
+        .catch(() => {
+          DASHBOARD_CARDS.innerHTML = `Total: N/A`;
+        });
+    }
   }
 
   function dashboardLayout() {
@@ -84,25 +128,21 @@ if (!currentUser) {
   <h1>E-COMMERCE</h1>
   <ul>
   <li><a class="link ${!dataValue && "active"}" href="${
-        dataValue ? "../" : ""
-      }">Dashboard</a></li>
-  <li><a class="link ${dataValue === "users" && "active"}" href="${
-        dataValue ? (dataValue === "users" ? "" : "../users/") : "users"
-      }">Users</a></li>
+    dataValue ? "../" : ""
+  }">Dashboard</a></li>
+  <li><a class="link ${dataValue === "Users" && "active"}" href="${
+    dataValue ? (dataValue === "Users" ? "" : "../users/") : "users"
+  }">Users</a></li>
   <li><a class="link ${dataValue === "Products" && "active"}" href="${
-        dataValue
-          ? dataValue === "Products"
-            ? ""
-            : "../products/"
-          : "products/"
-      }">Products</a></li>
+    dataValue ? (dataValue === "Products" ? "" : "../products/") : "products/"
+  }">Products</a></li>
   <li><a class="link ${dataValue === "Categories" && "active"}" href="${
-        dataValue
-          ? dataValue === "Categories"
-            ? ""
-            : "../categories/"
-          : "categories/"
-      }">Categories</a></li>
+    dataValue
+      ? dataValue === "Categories"
+        ? ""
+        : "../categories/"
+      : "categories/"
+  }">Categories</a></li>
           </ul>
         </section>
         <section id="dashboard-content">
