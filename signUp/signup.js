@@ -1,6 +1,4 @@
 const form = document.getElementsByClassName("user-form")[0];
-const formBtn = document.getElementById("button");
-// form.setAttribute("required", true);
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
 const email = document.getElementById("email");
@@ -12,22 +10,19 @@ form.addEventListener("submit", (e) => {
     const data = newData || [];
 
     if (
-      data &&
       data.find((item) => {
         return item.email === email.value;
       })
     ) {
       alert("Email already taken!");
     } else {
-      const formData = new FormData(form);
-      const obj = {};
+      const newUser = {
+        id: Math.random(),
+        email: email.value,
+        password: password.value,
+      };
 
-      for (let keyValues of formData.entries()) {
-        obj[keyValues[0]] = keyValues[1];
-      }
-      obj.id = Math.random();
-
-      data.push(obj);
+      data.push(newUser);
 
       localStorage.setItem("users", JSON.stringify(data));
       window.location.href = "../signIn/index.html";
