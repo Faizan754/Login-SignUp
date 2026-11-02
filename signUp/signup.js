@@ -20,7 +20,6 @@ form.addEventListener("submit", (e) => {
       alert("Email already taken!");
     } else {
       const formData = new FormData(form);
-      // console.log(formData.entries());
       const obj = {};
 
       for (let keyValues of formData.entries()) {
@@ -31,11 +30,7 @@ form.addEventListener("submit", (e) => {
       data.push(obj);
 
       localStorage.setItem("users", JSON.stringify(data));
+      window.location.href = "../signIn/index.html";
     }
   } else alert("Please re-check your password");
-
-  window.location.href = "../signIn/index.html";
-
-  // const inputs = [...document.getElementsByTagName("input")];
-  // inputs.map((input) => (input.value = ""));
 });
