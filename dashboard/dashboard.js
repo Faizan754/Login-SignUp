@@ -15,7 +15,7 @@ const layoutData = !dataValue
   : [{ i: dataValue }];
 
 if (!currentUser) {
-  window.location.replace(`${dataValue ? "../" : ""}../signin`);
+  window.location.replace(`${dataValue ? "../" : ""}../signIn`);
 } else {
   dashboardLayout();
 
@@ -131,17 +131,17 @@ if (!currentUser) {
     dataValue ? "../" : ""
   }">Dashboard</a></li>
   <li><a class="link ${dataValue === "Users" && "active"}" href="${
-    dataValue ? (dataValue === "Users" ? "" : "../users/") : "users"
+    dataValue ? (dataValue === "Users" ? "" : "../Users/") : "Users/"
   }">Users</a></li>
   <li><a class="link ${dataValue === "Products" && "active"}" href="${
-    dataValue ? (dataValue === "Products" ? "" : "../products/") : "products/"
+    dataValue ? (dataValue === "Products" ? "" : "../Products/") : "Products/"
   }">Products</a></li>
   <li><a class="link ${dataValue === "Categories" && "active"}" href="${
     dataValue
       ? dataValue === "Categories"
         ? ""
-        : "../categories/"
-      : "categories/"
+        : "../Categories/"
+      : "Categories/"
   }">Categories</a></li>
           </ul>
         </section>
